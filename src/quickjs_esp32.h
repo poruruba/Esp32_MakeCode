@@ -491,11 +491,11 @@ class ESP32QuickJS {
 
     JSValue Math = JS_NewObject(ctx);
     JS_SetPropertyStr(ctx, global, "Math", Math);
-    JS_SetPropertyStr(ctx, Math, "digitalReadPin",
+    JS_SetPropertyStr(ctx, Math, "max",
                       JS_NewCFunction(ctx, Math_max, "max", 2));
-    JS_SetPropertyStr(ctx, Math, "digitalReadPin",
+    JS_SetPropertyStr(ctx, Math, "min",
                       JS_NewCFunction(ctx, Math_min, "min", 2));
-    JS_SetPropertyStr(ctx, Math, "digitalReadPin",
+    JS_SetPropertyStr(ctx, Math, "abs",
                       JS_NewCFunction(ctx, Math_abs, "abs", 1));
     JS_SetPropertyStr(ctx, Math, "randint",
                       JS_NewCFunction(ctx, Math_randint, "randint", 2));
