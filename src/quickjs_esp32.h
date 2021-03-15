@@ -301,10 +301,14 @@ class ESP32QuickJS {
   }
 
   void end() {
-    if( JS_IsFunction(ctx, loop_func) )
+    if( JS_IsFunction(ctx, loop_func) ){
       JS_FreeValue(ctx, loop_func);
-    if( JS_IsFunction(ctx, btn_func) )
+      loop_func = JS_UNDEFINED;
+    }
+    if( JS_IsFunction(ctx, btn_func) ){
       JS_FreeValue(ctx, btn_func);
+      btn_func = JS_UNDEFINED;
+    }
     
     JS_FreeContext(ctx);
     JS_FreeRuntime(rt);
