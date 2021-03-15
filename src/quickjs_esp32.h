@@ -596,22 +596,19 @@ class ESP32QuickJS {
     if (!str)
       return JS_UNDEFINED;
     
-    const char *ptr = str;
     int index = 0;
-    while( *ptr != '\0' ){
-      if( *ptr != '.' && *ptr != '#'){
-        ptr++;
+    for( const char *ptr = str; *ptr != '\0'; ptr++ ){
+      if( *ptr != '.' && *ptr != '#')
         continue;
-      }
+
       if( *ptr == '#'){
         M5.dis.drawpix(index, LED_COLOR_ON);
       }else if( *ptr == '.' ){
         M5.dis.drawpix(index, LED_COLOR_OFF);
       }
-      ptr++;
       index++;
     }
-
+    
     JS_FreeCString(ctx, str);
     
     return JS_UNDEFINED;
