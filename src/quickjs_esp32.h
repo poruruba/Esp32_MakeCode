@@ -233,6 +233,12 @@ class JSTimer {
                                 [id](TimerEntry &t) { return t.id == id; }),
                  timers.end());
   }
+  void RemoveAll(JSContext *ctx){
+    for (auto &ent : timers){
+      JS_FreeValue(ctx, ent.func);
+    }
+    timers.clear();
+  }
   int32_t GetNextTimeout(int32_t now) {
     if (timers.empty()) {
       return -1;
@@ -301,15 +307,7 @@ class ESP32QuickJS {
   }
 
   void end() {
-    if( JS_IsFunction(ctx, loop_func) ){
-      JS_FreeValue(ctx, loop_func);
-      loop_func = JS_UNDEFINED;
-    }
-    if( JS_IsFunction(ctx, btn_func) ){
-      JS_FreeValue(ctx, btn_func);
-      btn_func = JS_UNDEFINED;
-    }
-    
+    timer.RemoveAll(ctx);
     JS_FreeContext(ctx);
     JS_FreeRuntime(rt);
   }
