@@ -654,7 +654,7 @@ class ESP32QuickJS {
 
     char text[2];
     text[0] = '0' + value;
-    text[0] = '\n';
+    text[1] = '\0';
     setText(text, 3);
 
     return JS_UNDEFINED;
